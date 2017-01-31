@@ -1,9 +1,9 @@
-let Rx = require('rx');
-let React = require('react');
-let ReactDOM = require('react-dom');
+import 'rxjs';
+import React from 'react';
+import {render} from 'react-dom';
 import App from './components/App.react.js';
 
-ReactDOM.render(
+render(
   <App/>,
   document.getElementById('app')
 );

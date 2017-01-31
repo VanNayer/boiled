@@ -1,23 +1,29 @@
 {
   "name": "boiled",
   "version": "0.0.1",
-  "description": "Barebones starter kit for React and RxJS, using Webpack and ES6.",
+  "description": "Boil votes for next technical epic.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack -wdc --progress",
+    "dev": "webpack --progress --config webpack.config.js --watch",
     "serve": "nodemon server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sdtsui/es6-react-rxjs-webpack-barebones-starter"
+    "url": "https://github.com/VanNayer/boiled"
   },
-  "author": "Daniel Tsui",
+  "author": "Nicolas De Nayer",
   "devDependencies": {
-    "babel-core": "^5.1.11",
-    "babel-loader": "^5.0.0",
-    "react": "^0.14.8",
-    "rx": "^2.5.2",
-    "webpack": "^1.8.9",
-    "react-dom": "^0.14.8"
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-doctolib": "^3.0.1",
+    "express": "4.14.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "recompact": "^1.0.2",
+    "rxjs": "^5.0.3",
+    "webpack": "^2.2.0"
+  },
+  "dependencies": {
+    "nodemon": "^1.11.0"
   }
 }

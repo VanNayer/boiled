@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 class App extends Component {
   render() {
     return (
-      <span>Hello World</span>
+      <span>Bien le bonsoir</span>
     );
   }
 }

@@ -12,20 +12,19 @@ module.exports = {
   },
 
   module: {
-    loaders: [{
-      test: function (filename) {
-        if (filename.indexOf('node_modules') !== -1) {
-          return false;
-        } else {
-          return /\.js$/.test(filename) !== -1;
-        }
-      },
-      loaders: ['babel-loader']
-    }]
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['doctolib']
+        },
+      }],
   },
 
   resolve: {
-    modulesDirectories: [path.join(__dirname, 'src'), 'node_modules']
+    modules: [path.join(__dirname, 'src'), 'node_modules']
   }
 
 };

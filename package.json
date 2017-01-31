@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --progress --config webpack.config.js --watch",
-    "serve": "nodemon server.js"
+    "serve": "nodemon server.js",
+    "lint:js": "eslint --quiet src/ test/*.js *.js"
   },
   "repository": {
     "type": "git",
@@ -15,13 +16,20 @@
   "devDependencies": {
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
+    "babel-eslint": "^7.1.1",
     "babel-preset-doctolib": "^3.0.1",
     "express": "4.14.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "recompact": "^1.0.2",
     "rxjs": "^5.0.3",
-    "webpack": "^2.2.0"
+    "webpack": "^2.2.0",
+    "eslint": "^3.14.0",
+    "eslint-config-doctolib": "^2.4.0",
+    "eslint-find-rules": "^1.14.0",
+    "eslint-plugin-babel": "^4.0.1",
+    "eslint-plugin-mocha": "^4.8.0",
+    "eslint-plugin-react": "^6.9.0"
   },
   "dependencies": {
     "nodemon": "^1.11.0"

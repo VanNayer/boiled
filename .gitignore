@@ -16,5 +16,8 @@ lib-cov
 # Optional npm cache directory
 .npm
 
+# work files
+data.json
+
 # Optional REPL history
 .node_repl_history

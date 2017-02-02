@@ -18,18 +18,19 @@
     "babel-loader": "^6.2.10",
     "babel-eslint": "^7.1.1",
     "babel-preset-doctolib": "^3.0.1",
-    "express": "4.14.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "recompact": "^1.0.2",
-    "rxjs": "^5.0.3",
-    "webpack": "^2.2.0",
     "eslint": "^3.14.0",
     "eslint-config-doctolib": "^2.4.0",
     "eslint-find-rules": "^1.14.0",
     "eslint-plugin-babel": "^4.0.1",
     "eslint-plugin-mocha": "^4.8.0",
-    "eslint-plugin-react": "^6.9.0"
+    "eslint-plugin-react": "^6.9.0",
+    "express": "4.14.0",
+    "jquery": "^2.2.4",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "recompact": "^1.1.0",
+    "rxjs": "^5.0.3",
+    "webpack": "^2.2.0"
   },
   "dependencies": {
     "nodemon": "^1.11.0"

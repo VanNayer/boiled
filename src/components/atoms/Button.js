@@ -3,7 +3,7 @@ import recompact from 'recompact';
 
 const Button = ({onAddEpic}) => (
   <button type="button" onClick={onAddEpic}>
-    {'Ajoute la choucroute'}
+    {'Ajouter l\'Epic'}
   </button>
 );
 export default recompact.connectObs(({addEpic$}) => (

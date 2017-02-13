@@ -19,7 +19,7 @@ class App extends Component {
 App.propTypes = {};
 export default recompact.compose(
   recompact.withObs(() => {
-    const input$ = new Rx.BehaviorSubject('Your epic name');
+    const input$ = new Rx.BehaviorSubject('');
     const addEpic$ = new Rx.Subject();
     const firstLoad$ = Rx.Observable.fromPromise($.getJSON('load')).map(response => response['epics']);
     const epics$ = addEpic$

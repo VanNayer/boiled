@@ -5,6 +5,7 @@ const InputText = ({onChange, input}) => (
   <input
     type="text"
     name="text"
+    placeholder="Epic name"
     value={input}
     onChange={onChange}
   />

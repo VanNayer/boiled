@@ -19,17 +19,17 @@ class App extends Component {
 App.propTypes = {};
 export default recompact.compose(
   recompact.withObs(() => {
-    const firstLoad$ = Rx.Observable.fromPromise($.getJSON('load')).map(response => response['epics']);
+    const firstLoad$ = Rx.Observable.fromPromise($.getJSON('epics.json'));
     const input$ = new Rx.BehaviorSubject('');
     const addEpic$ = new Rx.Subject();
     const epics$ = addEpic$
       .withLatestFrom(input$)
       .switchMap(([, input]) => (
-        fetch('/update', {
+        fetch((`/epics.json?epic[name]=${input}`), {
           method: 'POST',
           headers: {'ContentType': 'application/json; charset=utf-8'},
           body: input,
-        }).then(response => response.json().then(json => json.epics))
+        }).then(response => response.json().then(json => json))
       ))
       .startWith([]).merge(firstLoad$);
     return {

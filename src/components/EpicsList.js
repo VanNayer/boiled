@@ -1,33 +1,17 @@
-import React, {Component} from 'react';
-import {Observable} from 'rxjs';
-import $ from 'jquery';
+import React from 'react';
+import recompact from 'recompact';
 
-class EpicsList extends Component {
-  state = {epics: []};
+const EpicsList = ({epics}) => (
+  <ul>
+    {
+      epics.map(epic =>
+        <li key={epic}>{epic}</li>
+      )
+    }
+  </ul>
+);
 
-
-  componentWillMount() {
-    const requests$ = Observable.of('load');
-    const responses$ = requests$.flatMap(requestUrl => {
-      return Observable.fromPromise($.getJSON(requestUrl));
-    });
-
-    responses$.subscribe(response => {
-      this.setState({epics: response.epics});
-    });
-  }
-
-
-  render() {
-    return (
-      <ul>
-        {
-          this.state.epics.map(epic =>
-            <li key={epic}>{epic}</li>
-          )
-        }
-      </ul>
-    );
-  }
-}
-export default EpicsList;
+export default recompact.compose(
+  recompact.connectObs(({epics$}) => ({epics: epics$}
+  )),
+)(EpicsList);

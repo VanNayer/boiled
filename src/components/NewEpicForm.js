@@ -8,4 +8,5 @@ const NewEpicForm = () => (
     <Button text="Add epic" />
   </div>
 );
+
 export default NewEpicForm;

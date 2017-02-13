@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import NewEpicForm from './NewEpicForm.js';
 import EpicsList from './EpicsList.js';
+import recompact from 'recompact';
+import Rx from 'rxjs';
+import $ from 'jquery';
 
 class App extends Component {
   render() {
@@ -8,10 +11,31 @@ class App extends Component {
       <div>
         <h1>{'Let\'s boil the next technical epic'}</h1>
         <NewEpicForm />
-        <EpicsList />
+        <EpicsList  />
       </div>
     );
   }
 }
 App.propTypes = {};
-export default App;
+export default recompact.compose(
+  recompact.withObs(() => {
+    const input$ = new Rx.BehaviorSubject('Your epic name');
+    const addEpic$ = new Rx.Subject();
+    const firstLoad$ = Rx.Observable.fromPromise($.getJSON('load')).map(response => response['epics']);
+    const epics$ = addEpic$
+      .withLatestFrom(input$)
+      .switchMap(([, input]) => (
+        fetch('/update', {
+          method: 'POST',
+          headers: {'ContentType': 'application/json; charset=utf-8'},
+          body: JSON.stringify(input),
+        }).then(response => response.json().then(json => json.epics))
+      ))
+      .startWith([]).merge(firstLoad$);
+    return {
+      input$,
+      addEpic$,
+      epics$,
+    };
+  }),
+)(App);

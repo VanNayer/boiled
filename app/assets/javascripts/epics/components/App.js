@@ -8,7 +8,7 @@ import $ from 'jquery'
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="pt-3">
         <h1>{'Let\'s boil the next technical epic'}</h1>
         <NewEpicForm />
         <EpicsList />

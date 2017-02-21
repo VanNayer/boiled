@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213225519) do
+ActiveRecord::Schema.define(version: 20170221192925) do
 
   create_table "epics", force: :cascade do |t|
     t.string   "name",       limit: 60
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.integer  "user_id"
     t.index ["name"], name: "index_epics_on_name", unique: true
+    t.index ["user_id"], name: "index_epics_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

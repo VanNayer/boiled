@@ -12,7 +12,7 @@ class EpicsController < ApplicationController
   # POST /epics
   # POST /epics.json
   def create
-    @epic = Epic.new(epic_params)
+    @epic = Epic.new(epic_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @epic.save

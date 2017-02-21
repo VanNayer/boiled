@@ -5,7 +5,7 @@ const EpicsList = ({ epics }) => (
   <ul>
     {
       epics.map(epic =>
-        <li key={epic.id}>{epic.name}</li>,
+        <li key={epic.id}><b>{epic.name}</b> <i>by {epic.user}</i></li>,
       )
     }
   </ul>

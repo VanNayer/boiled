@@ -1,12 +1,12 @@
-import React from 'react';
-import recompact from 'recompact';
+import React from 'react'
+import recompact from 'recompact'
 
-const Button = ({onAddEpic}) => (
+const Button = ({ onAddEpic }) => (
   <button type="button" onClick={onAddEpic}>
     {'Ajouter l\'Epic'}
   </button>
-);
-export default recompact.connectObs(({addEpic$}) => (
+)
+export default recompact.connectObs(({ addEpic$ }) => (
   {
     onAddEpic: addEpic$,
-  }))(Button);
+  }))(Button)

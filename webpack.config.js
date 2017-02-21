@@ -1,12 +1,13 @@
 var path = require('path');
 module.exports = {
-  entry: [
-    './app/assets/javascripts/epics/index'
-  ],
+  entry: {
+    logged: './app/assets/javascripts/epics/index',
+    unlogged: './app/assets/javascripts/index',
+  },
 
   output: {
     path: path.join(__dirname, 'public/assets/'),
-    filename: 'index.js'
+     filename: "[name].js"
   },
 
   module: {

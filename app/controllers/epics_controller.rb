@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 class EpicsController < ApplicationController
   before_action :set_epic, only: %i(show edit update destroy)
-  protect_from_forgery with: :null_session
   before_action :authenticate_user!
 
   # GET /epics

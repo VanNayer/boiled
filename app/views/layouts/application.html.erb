@@ -1,20 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Boiled</title>
-    <%= csrf_meta_tags %>
+    <head>
+        <title>Boiled</title>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <% if !user_signed_in? %>
+          <script src="/assets/unlogged.js"></script>
+        <% end %>
+    </head>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
-    <%= yield %>
-  </body>
+    <body>
+        <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+            <%= link_to 'Boiled', :root, class: "navbar-brand" %>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <% if user_signed_in? %>
+                    <li class="nav-item">
+                        <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: "nav-link" %>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#"><%=current_user.email%></a>
+                    </li>
+                    <% end %>
+                </ul>
+            </div>
+        </nav>
+        <div class="container pt-5">
+            <% if notice %>
+            <p class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+            <p class="alert alert-danger"><%= alert %></p>
+            <% end %>
+            <%= yield %>
+        </div>
+    </body>
 </html>

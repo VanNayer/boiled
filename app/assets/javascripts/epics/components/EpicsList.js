@@ -1,17 +1,17 @@
-import React from 'react';
-import recompact from 'recompact';
+import React from 'react'
+import recompact from 'recompact'
 
-const EpicsList = ({epics}) => (
+const EpicsList = ({ epics }) => (
   <ul>
     {
       epics.map(epic =>
-        <li key={epic.id}>{epic.name}</li>
+        <li key={epic.id}>{epic.name}</li>,
       )
     }
   </ul>
-);
+)
 
 export default recompact.compose(
-  recompact.connectObs(({epics$}) => ({epics: epics$}
+  recompact.connectObs(({ epics$ }) => ({ epics: epics$ }
   )),
-)(EpicsList);
+)(EpicsList)

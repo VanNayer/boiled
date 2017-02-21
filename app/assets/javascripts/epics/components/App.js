@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import NewEpicForm from './NewEpicForm.js';
-import EpicsList from './EpicsList.js';
-import recompact from 'recompact';
-import Rx from 'rxjs';
-import $ from 'jquery';
+import React, { Component } from 'react'
+import NewEpicForm from './NewEpicForm.js'
+import EpicsList from './EpicsList.js'
+import recompact from 'recompact'
+import Rx from 'rxjs'
+import $ from 'jquery'
 
 class App extends Component {
   render() {
@@ -11,31 +11,34 @@ class App extends Component {
       <div>
         <h1>{'Let\'s boil the next technical epic'}</h1>
         <NewEpicForm />
-        <EpicsList  />
+        <EpicsList />
       </div>
-    );
+    )
   }
 }
-App.propTypes = {};
+App.propTypes = {}
 export default recompact.compose(
   recompact.withObs(() => {
-    const firstLoad$ = Rx.Observable.fromPromise($.getJSON('epics.json'));
-    const input$ = new Rx.BehaviorSubject('');
-    const addEpic$ = new Rx.Subject();
+    const firstLoad$ = Rx.Observable.fromPromise($.getJSON('epics.json'))
+    const input$ = new Rx.BehaviorSubject('')
+    const addEpic$ = new Rx.Subject()
     const epics$ = addEpic$
       .withLatestFrom(input$)
       .switchMap(([, input]) => (
         fetch((`/epics.json?epic[name]=${input}`), {
+          credentials: 'same-origin',
           method: 'POST',
-          headers: {'ContentType': 'application/json; charset=utf-8'},
+          headers: {
+            ContentType: 'application/json; charset=utf-8',
+          },
           body: input,
         }).then(response => response.json().then(json => json))
       ))
-      .startWith([]).merge(firstLoad$);
+      .startWith([]).merge(firstLoad$)
     return {
       input$,
       addEpic$,
       epics$,
-    };
+    }
   }),
-)(App);
+)(App)

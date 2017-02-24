@@ -3,6 +3,7 @@ import recompact from 'recompact'
 
 const InputText = ({ onChange, onKeyDown, input }) => (
   <input
+    className="form-control"
     type="text"
     name="text"
     placeholder="Epic name"
@@ -12,9 +13,7 @@ const InputText = ({ onChange, onKeyDown, input }) => (
   />
 )
 export default recompact.compose(
-  recompact.connectObs(({ input$, addEpic$ }) => (
-    { onInput: input$, input: input$, onKeyDown: addEpic$ }
-  )),
+  recompact.connectObs(({ input$, addEpic$ }) => ({ onInput: input$, input: input$, onKeyDown: addEpic$ })),
   recompact.withHandlers({
     onChange: props => (event) => {
       props.onInput(event.target.value)

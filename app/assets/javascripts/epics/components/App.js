@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import NewEpicForm from './NewEpicForm.js'
-import EpicsList from './EpicsList.js'
+import NewEpicForm from './form/NewEpicForm'
+import EpicsList from './list/EpicsList'
 import recompact from 'recompact'
 import Rx from 'rxjs'
 import $ from 'jquery'

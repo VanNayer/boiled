@@ -2,7 +2,7 @@ import recompact from 'recompact'
 import InputText from '../atoms/InputText'
 
 export default recompact.compose(
-  recompact.connectObs(({ input$, addEpic$ }) => ({ onInput: input$, input: input$, onKeyDown: addEpic$ })),
+  recompact.connectObs(({ input$, requestAddEpic$ }) => ({ onInput: input$, input: input$, onKeyDown: requestAddEpic$ })),
   recompact.withHandlers({
     onChange: props => (event) => {
       props.onInput(event.target.value)

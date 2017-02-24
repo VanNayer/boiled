@@ -21,8 +21,8 @@ export default recompact.compose(
   recompact.withObs(() => {
     const firstLoad$ = Rx.Observable.fromPromise($.getJSON('epics.json'))
     const input$ = new Rx.BehaviorSubject('')
-    const addEpic$ = new Rx.Subject()
-    const epics$ = addEpic$
+    const requestAddEpic$ = new Rx.Subject()
+    const responseAddEpic$ = requestAddEpic$
       .withLatestFrom(input$)
       .switchMap(([, input]) => (
         fetch((`/epics.json?epic[name]=${input}`), {
@@ -36,10 +36,11 @@ export default recompact.compose(
           return response.json().then(json => json)
         })
       ))
-      .startWith([]).merge(firstLoad$)
+      .startWith([])
+    const epics$ = Rx.Observable.merge(responseAddEpic$, firstLoad$)
     return {
       input$,
-      addEpic$,
+      requestAddEpic$,
       epics$,
     }
   }),

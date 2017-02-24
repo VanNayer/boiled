@@ -31,7 +31,10 @@ export default recompact.compose(
           headers: {
             ContentType: 'application/json; charset=utf-8',
           },
-        }).then(response => response.json().then(json => json))
+        }).then((response) => {
+          input$.next('')
+          return response.json().then(json => json)
+        })
       ))
       .startWith([]).merge(firstLoad$)
     return {

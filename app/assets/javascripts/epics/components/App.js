@@ -19,8 +19,27 @@ class App extends Component {
 App.propTypes = {}
 export default recompact.compose(
   recompact.withObs(() => {
+    //
     const firstLoad$ = Rx.Observable.fromPromise($.getJSON('epics.json'))
+
+    //
+    const requestVoteForEpic$ = new Rx.Subject()
+    const responseVoteForEpic$ = requestVoteForEpic$
+      .flatMap(
+        id => (
+          fetch((`/epics/${id}/vote_up.json`), {
+            credentials: 'same-origin',
+            method: 'POST',
+            headers: {
+              ContentType: 'application/json; charset=utf-8',
+            },
+          }).then(response => response.json().then(json => json))
+        ),
+      )
+    //
     const input$ = new Rx.BehaviorSubject('')
+
+    //
     const requestAddEpic$ = new Rx.Subject()
     const responseAddEpic$ = requestAddEpic$
       .withLatestFrom(input$)
@@ -37,10 +56,13 @@ export default recompact.compose(
         })
       ))
       .startWith([])
-    const epics$ = Rx.Observable.merge(responseAddEpic$, firstLoad$)
+
+    //
+    const epics$ = Rx.Observable.merge(firstLoad$, responseAddEpic$, responseVoteForEpic$)
     return {
       input$,
       requestAddEpic$,
+      requestVoteForEpic$,
       epics$,
     }
   }),

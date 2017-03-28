@@ -1,53 +1,35 @@
 # frozen_string_literal: true
 class EpicsController < ApplicationController
-  before_action :set_epic, only: %i(show edit update destroy)
+  before_action :set_epic, only: %i(vote_up destroy)
   before_action :authenticate_user!
 
-  # GET /epics
-  # GET /epics.json
   def index
     @epics = Epic.all
   end
 
-  # POST /epics
-  # POST /epics.json
   def create
     @epic = Epic.new(epic_params.merge(user_id: current_user.id))
-
-    respond_to do |format|
-      if @epic.save
-        @epics = Epic.all
-        format.html { redirect_to @epic, notice: 'Epic was successfully created.' }
-        format.json { render :index, status: :created, location: @epic }
-      else
-        format.html { render :new }
-        format.json { render json: @epic.errors, status: :unprocessable_entity }
-      end
+    if @epic.save
+      @epics = Epic.all
+      render :index, status: :created, location: @epic
+    else
+      render json: @epic.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /epics/1
-  # PATCH/PUT /epics/1.json
-  def update
-    respond_to do |format|
-      if @epic.update(epic_params)
-        format.html { redirect_to @epic, notice: 'Epic was successfully updated.' }
-        format.json { render :show, status: :ok, location: @epic }
-      else
-        format.html { render :edit }
-        format.json { render json: @epic.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /epics/1
-  # DELETE /epics/1.json
   def destroy
     @epic.destroy
     respond_to do |format|
       format.html { redirect_to epics_url, notice: 'Epic was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def vote_up
+    @epic = Epic.find(params[:id])
+    @epic.vote_up current_user
+    @epics = Epic.all
+    render :index, status: :created, location: @epic
   end
 
   private

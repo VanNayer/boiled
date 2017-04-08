@@ -26,7 +26,6 @@ class EpicsController < ApplicationController
   end
 
   def vote_up
-    @epic = Epic.find(params[:id])
     @epic.vote_up current_user
     @epics = Epic.all
     render :index, status: :created, location: @epic

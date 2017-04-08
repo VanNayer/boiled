@@ -2,7 +2,7 @@ var path = require('path');
 module.exports = {
   entry: {
     logged: './app/assets/javascripts/epics/index',
-    unlogged: './app/assets/javascripts/index',
+    minimal: './app/assets/javascripts/minimal',
   },
 
   output: {

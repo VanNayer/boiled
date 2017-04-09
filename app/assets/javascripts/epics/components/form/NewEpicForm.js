@@ -9,7 +9,7 @@ export default recompact.compose(
     return {}
   }),
 )(() =>
-  <div className="input-group input-group-lg py-3">
+  <div className="input-group input-group-lg py-3 full-container">
     <NewEpicInput />
     <AddEpicButton />
   </div>,

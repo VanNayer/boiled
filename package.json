@@ -30,7 +30,7 @@
     "jquery": "^2.2.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "recompact": "^1.1.0",
+    "recompact": "^2.2.4",
     "rxjs": "^5.0.3",
     "webpack": "^2.2.0",
     "nodemon": "^1.11.0"

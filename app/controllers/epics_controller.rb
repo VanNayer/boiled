@@ -4,13 +4,13 @@ class EpicsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @epics = Epic.all
+    @epics = Epic.all_with_score
   end
 
   def create
     @epic = Epic.new(epic_params.merge(user_id: current_user.id))
     if @epic.save
-      @epics = Epic.all
+      @epics = Epic.all_with_score
       render :index, status: :created, location: @epic
     else
       render json: @epic.errors, status: :unprocessable_entity
@@ -27,7 +27,7 @@ class EpicsController < ApplicationController
 
   def vote_up
     @epic.vote_up current_user
-    @epics = Epic.all
+    @epics = Epic.all_with_score
     render :index, status: :created, location: @epic
   end
 

@@ -32,8 +32,7 @@ export default recompact.compose(
     }
   }),
 )(() =>
-  <div className="pt-3">
-    <h1>{'Let\'s boil the next technical epic'}</h1>
+  <div>
     <NewEpicForm />
     <EpicsList />
   </div>,

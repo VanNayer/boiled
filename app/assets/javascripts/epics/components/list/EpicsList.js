@@ -2,16 +2,19 @@ import React from 'react'
 import recompact from 'recompact'
 import VoteUpButton from './VoteUpButton'
 
-const EpicsList = ({ epics }) => (
+const style = {
+  width: '100%',
+}
 
+const EpicsList = ({ epics }) => (
   <ul className="list-group">
     {
-      epics.map(epic =>
-        <li key={epic.id} className="list-group-item">
-          <div className="row">
-            <VoteUpButton epicId={epic.id} className="col-sm-2 col-md-2" />
-            <b className="col-sm-4 col-md-4">{epic.name}</b>
-            <i className="col-sm-4 col-md-4">by {epic.user}</i>
+      epics.map(({ id, user, name }) =>
+        <li key={id} className="list-group-item">
+          <div className="row" style={style}>
+            <b className="col-4 col-md-4">{name}</b>
+            <i className="col-7 col-md-6">by {user}</i>
+            <VoteUpButton epicId={id} className="col-1 col-md-1" />
           </div>
         </li>,
       )
